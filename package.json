@@ -1,0 +1,21 @@
+{
+  "name": "confluence_util",
+  "version": "1.0.0",
+  "description": "utility for confluence",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tools",
+    "utility"
+  ],
+  "author": "nhk",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.1",
+    "confluence-api": "^1.4.0",
+    "handlebars": "^4.1.0",
+    "html-parser": "^0.11.0"
+  }
+}
