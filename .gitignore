@@ -59,3 +59,6 @@ typings/
 
 # next.js build output
 .next
+
+# exception configure file for personal security
+config.js
