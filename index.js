@@ -5,7 +5,7 @@ var os = require('os');
 // Program Parameter
 if (process.argv.length !== 3) {
     console.error('This application needs argument.' + os.EOL
-        + "eg. '{\"PageIds\": {\"template\": 99499848, \"context\": 99499859, \"parent\": 98012841}}'");
+        + "eg. '{\"PageIds\": {\"template\": 99499848, \"context\": 99499859, \"parentSpace\": \"~space\", \"parentId\": 98012841}}'");
     process.exit(1);
 }
 
@@ -13,7 +13,8 @@ var runtimeParameters = JSON.parse(process.argv[2]);
 console.log(runtimeParameters);
 let templatePageId = runtimeParameters.PageIds.template,
     contextPageId = runtimeParameters.PageIds.context,
-    parentPageId = runtimeParameters.PageIds.parent;
+    parentSpace = runtimeParameters.PageIds.parentSpace,
+    parentPageId = runtimeParameters.PageIds.parentId;
 
 
 var async = require("async");
@@ -88,6 +89,10 @@ async.parallel(tasks, function (err, results) {
             var context = contextGenerator();
 
             var Handlebars = require('handlebars');
+            var helpers = require('handlebars-helpers')({
+                handlebars: Handlebars
+            });
+
             var templateHeader = Handlebars.compile(templateHeaderCode);
             var templateBody = Handlebars.compile(templateBodyCode);
             console.debug({ templateHeader: templateHeader, templateBody: outputBody });
@@ -96,7 +101,7 @@ async.parallel(tasks, function (err, results) {
             console.debug({ outputTitle: outputTitle, outputBody: outputBody });
 
             postContent({
-                space: '~nhk',
+                space: parentSpace,
                 title: outputTitle,
                 contents: outputBody,
                 parentId: parentPageId
