@@ -89,9 +89,8 @@ async.parallel(tasks, function (err, results) {
             var context = contextGenerator();
 
             var Handlebars = require('handlebars');
-            var helpers = require('handlebars-helpers')({
-                handlebars: Handlebars
-            });
+            var helpers = require('handlebars-helpers')
+            Handlebars.registerHelper('.join', helpers.array().join)
 
             var templateHeader = Handlebars.compile(templateHeaderCode);
             var templateBody = Handlebars.compile(templateBodyCode);
